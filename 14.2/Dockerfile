@@ -18,8 +18,8 @@ RUN powershell -Command `
 RUN powershell -Command `
     Invoke-WebRequest https://curl.haxx.se/ca/cacert.pem $env:USERPROFILE/cacert.pem; `
     cd $env:USERPROFILE; `
-    "C:\Program Files\OpenSSL-Win64\bin\openssl.exe" pkcs12 -export -nokeys -out certs.pfx -in cacert.pem -passout pass:"PASSWORD"; `
-    $plaintext_pw = "PASSWORD"; `
+    C:\Program Files\OpenSSL-Win64\bin\openssl.exe pkcs12 -export -nokeys -out certs.pfx -in cacert.pem -passout pass:PASSWORD; `
+    $plaintext_pw = PASSWORD; `
     $secure_pw = $plaintext_pw | ConvertTo-SecureString -AsPlainText -Force; `
     Import-PfxCertificate -Password $secure_pw  -CertStoreLocation Cert:\LocalMachine\Root -FilePath certs.pfx
 
