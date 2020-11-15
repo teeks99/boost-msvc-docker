@@ -16,11 +16,11 @@ RUN powershell -Command `
 
 # Add root certificates to the container
 RUN powershell -Command `
-    Invoke-WebRequest https://curl.haxx.se/ca/cacert.pem $env:USERPROFILE/cacert.pem; `
+    Invoke-WebRequest https://curl.haxx.se/ca/cacert.pem -OutFile $env:USERPROFILE\cacert.pem; `
     cd $env:USERPROFILE; `
     $plaintext_pw = 'PASSWORD'; `
-    'C:\Program Files\OpenSSL-Win64\bin\openssl.exe' pkcs12 -export -nokeys -out certs.pfx -in cacert.pem -passout pass:$plaintext_pw; `
     $secure_pw = $plaintext_pw | ConvertTo-SecureString -AsPlainText -Force; `
+    & 'C:\Program Files\OpenSSL-Win64\bin\openssl.exe' pkcs12 -export -nokeys -out certs.pfx -in cacert.pem -passout pass:$plaintext_pw; `
     Import-PfxCertificate -Password $secure_pw  -CertStoreLocation Cert:\LocalMachine\Root -FilePath certs.pfx
 
 # Define the entry point for the docker container.
