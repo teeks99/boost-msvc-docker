@@ -8,8 +8,11 @@ RUN powershell -Command `
 	choco feature enable --name allowGlobalConfirmation
 	
 COPY Packages.config Packages.config
+COPY user-config.jam user-config.jam
 RUN powershell -Command `
-    choco install Packages.config
+    choco install Packages.config `
+    del .\Packages.config
+    move .\user-config.jam $env:USERPROFILE
 
 # Define the entry point for the docker container.
 # This entry point adds the developer environemnt and starts the command shell
