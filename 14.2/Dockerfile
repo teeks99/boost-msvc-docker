@@ -15,13 +15,13 @@ RUN powershell -Command `
     move .\user-config.jam $env:USERPROFILE; 
 
 # Add root certificates to the container
-RUN powershell -Command `
+RUN powershell -Command "`
     Invoke-WebRequest https://curl.haxx.se/ca/cacert.pem -OutFile $env:USERPROFILE\cacert.pem; `
     cd $env:USERPROFILE; `
     $plaintext_pw = 'PASSWORD'; `
     $secure_pw = ConvertTo-SecureString $plaintext_pw -AsPlainText -Force; `
     & 'C:\Program Files\OpenSSL-Win64\bin\openssl.exe' pkcs12 -export -nokeys -out certs.pfx -in cacert.pem -passout pass:$plaintext_pw; `
-    Import-PfxCertificate -Password $secure_pw  -CertStoreLocation Cert:\LocalMachine\Root -FilePath certs.pfx
+    Import-PfxCertificate -Password $secure_pw  -CertStoreLocation Cert:\LocalMachine\Root -FilePath certs.pfx"
 
 # Define the entry point for the docker container.
 # This entry point adds the developer environemnt and starts the command shell
