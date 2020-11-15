@@ -15,7 +15,8 @@ RUN powershell -Command `
     move .\user-config.jam $env:USERPROFILE; 
 
 # Add root certificates to the container
-RUN Invoke-WebRequest https://curl.haxx.se/ca/cacert.pem $env:USERPROFILE/cacert.pem; `
+RUN powershell -Command `
+    Invoke-WebRequest https://curl.haxx.se/ca/cacert.pem $env:USERPROFILE/cacert.pem; `
     cd $env:USERPROFILE; `
     "C:\Program Files\OpenSSL-Win64\bin\openssl.exe" pkcs12 -export -nokeys -out certs.pfx -in cacert.pem -passout pass:"PASSWORD"; `
     $plaintext_pw = "PASSWORD"; `
