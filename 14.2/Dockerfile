@@ -11,7 +11,7 @@ COPY Packages.config Packages.config
 COPY user-config.jam user-config.jam
 RUN powershell -Command `
     choco install Packages.config `
-    del .\Packages.config
+    del .\Packages.config `
     move .\user-config.jam $env:USERPROFILE
 
 # Define the entry point for the docker container.
