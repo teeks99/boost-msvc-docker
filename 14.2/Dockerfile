@@ -1,5 +1,5 @@
 #escape=`
-FROM teeks99/boost-msvc:14.2
+FROM teeks99/msvc-win:14.2
   
 # Install Chocolatey
 RUN powershell -Command `
