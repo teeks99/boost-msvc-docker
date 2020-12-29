@@ -35,6 +35,6 @@ RUN  `
 
 # Define the entry point for the docker container.
 # This entry point adds the developer environemnt and starts the command shell
-ENTRYPOINT ["C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\Common7\\Tools\\VsDevCmd.bat", `
+ENTRYPOINT ["C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\Common7\\Tools\\VsDevCmd.bat", `
     "&&", "cmd.exe"]
 
