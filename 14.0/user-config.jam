@@ -1,0 +1,20 @@
+import toolset : using ;
+
+using msvc : 14.0 ;
+
+using python
+: 3.9 # version
+: C:\\Python39-32\\python.exe # Interperter/path to dir
+: C:\\Python39-32\\include # includes
+: C:\\Python39-32\\libs # libs
+: <address-model>32 <address-model> # conditions
+;
+
+using python
+: 3.9 # version
+: C:\\Python39-64\\python.exe # Interperter/path to dir
+: C:\\Python39-64\\include # includes
+: C:\\Python39-64\\libs # libs
+: <address-model>64 # conditions
+;
+
